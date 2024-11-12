@@ -20,7 +20,7 @@ public class StudentService {
     }
 
     public Student findStudent(long id) {
-        return studentRepository.findById(id).get();
+        return studentRepository.findById(id).orElseThrow(() -> new NullPointerException("Пустое значение!"));
 
     }
 

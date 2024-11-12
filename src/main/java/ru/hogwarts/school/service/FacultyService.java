@@ -19,7 +19,7 @@ public class FacultyService {
     }
 
     public Faculty findFaculty(long id) {
-        return facultyRepository.findById(id).get();
+        return facultyRepository.findById(id).orElseThrow(() -> new NullPointerException("Пустое значение!"));
     }
 
     public Faculty editFaculty(Faculty faculty) {
