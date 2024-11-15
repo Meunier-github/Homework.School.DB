@@ -3,6 +3,7 @@ package ru.hogwarts.school.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
@@ -18,7 +19,6 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-
     @GetMapping("{id}")
     public ResponseEntity<Student> getStudentInfo(@PathVariable Long id) {
         Student student = studentService.findStudent(id);
@@ -26,6 +26,19 @@ public class StudentController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(student);
+    }
+
+    @GetMapping()
+    public ResponseEntity<Collection<Student>> getStudents(@RequestParam(required = false) Integer min,
+                                                           @RequestParam(required = false) Integer max,
+                                                           @RequestParam(required = false) Integer age) {
+        if (min != null && max != null) {
+            return ResponseEntity.ok(studentService.findByAgeBetween(min, max));
+        }
+        if (age > 0) {
+            return ResponseEntity.ok(studentService.findByAge(age));
+        }
+        return ResponseEntity.ok(studentService.getAll());
     }
 
     @PostMapping
@@ -48,12 +61,13 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
-    public ResponseEntity<Collection<Student>> findStudents(@RequestParam(required = false) Integer age) {
-        if (age > 0) {
-            return ResponseEntity.ok(studentService.findByAge(age));
+    @GetMapping("/facultyOfStudent")
+    public ResponseEntity<Faculty> findFacultyOfStudent(@RequestParam long id) {
+        Faculty faculty = studentService.getFacultyOfStudent(id);
+        if (faculty == null) {
+            return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(Collections.emptyList());
+        return ResponseEntity.ok(faculty);
     }
 
     @GetMapping("/all")
