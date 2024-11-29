@@ -43,7 +43,7 @@ class StudentControllerRestTest {
         Assertions.assertThat(response).isNotNull();
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(response.getBody()).isEqualTo(student);
-        studentRepository.deleteById(student.getId());
+        //studentRepository.deleteById(student.getId());
 
     }
 
@@ -60,7 +60,7 @@ class StudentControllerRestTest {
         Assertions.assertThat(response).isNotNull();
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(response.getBody()).isNotNull();
-        studentRepository.deleteById(student.getId());
+        //studentRepository.deleteById(student.getId());
     }
 
     @Test
@@ -72,7 +72,7 @@ class StudentControllerRestTest {
 
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(response.getBody()).isEqualTo(student);
-        studentRepository.deleteById(student.getId());
+        //studentRepository.deleteById(student.getId());
     }
 
     @Test
@@ -84,7 +84,7 @@ class StudentControllerRestTest {
 
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(response.getBody()).isEqualTo(student);
-        studentRepository.deleteById(student.getId());
+        //studentRepository.deleteById(student.getId());
     }
 
     @Test
@@ -111,8 +111,8 @@ class StudentControllerRestTest {
                 Student.class,Faculty.class);
         Assertions.assertThat(response).isNotNull();
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        studentRepository.deleteById(student.getId());
-        facultyRepository.deleteById(faculty.getId());
+        //studentRepository.deleteById(student.getId());
+        //facultyRepository.deleteById(faculty.getId());
     }
 
     @Test
@@ -138,7 +138,7 @@ class StudentControllerRestTest {
         Assertions.assertThat(response).isNotNull();
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(response.getBody()).isNotNull();
-        studentRepository.deleteById(student.getId());
+        //studentRepository.deleteById(student.getId());
     }
 
     void setStudent() {
