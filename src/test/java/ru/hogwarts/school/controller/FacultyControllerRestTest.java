@@ -39,7 +39,7 @@ class FacultyControllerRestTest {
         Assertions.assertThat(response).isNotNull();
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(response.getBody()).isEqualTo(faculty);
-        facultyRepository.deleteById(faculty.getId());
+       // facultyRepository.deleteById(faculty.getId());
 
     }
 
@@ -52,7 +52,7 @@ class FacultyControllerRestTest {
         Assertions.assertThat(response).isNotNull();
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(response.getBody()).isEqualTo(faculty);
-        facultyRepository.deleteById(faculty.getId());
+        //facultyRepository.deleteById(faculty.getId());
     }
 
     @Test
@@ -63,7 +63,7 @@ class FacultyControllerRestTest {
         Assertions.assertThat(response).isNotNull();
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(response.getBody()).isEqualTo(faculty);
-        facultyRepository.deleteById(faculty.getId());
+        //facultyRepository.deleteById(faculty.getId());
     }
 
     @Test
@@ -114,7 +114,7 @@ class FacultyControllerRestTest {
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(response.getBody()).isNotNull();
 
-        facultyRepository.deleteById(faculty.getId());
+       // facultyRepository.deleteById(faculty.getId());
     }
 
     @Test
@@ -134,8 +134,8 @@ class FacultyControllerRestTest {
         Assertions.assertThat(response).isNotNull();
         Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(response.getBody()).isNotNull();
-        studentRepository.deleteById(student.getId());
-        facultyRepository.deleteById(faculty.getId());
+       // studentRepository.deleteById(student.getId());
+        //facultyRepository.deleteById(faculty.getId());
     }
 
     void setStudent() {
