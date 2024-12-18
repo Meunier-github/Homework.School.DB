@@ -1,6 +1,8 @@
 package ru.hogwarts.school.service;
 
 import jakarta.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,7 @@ public class AvatarService {
     private String avatarsDir;
     private final AvatarRepository avatarRepository;
     private final StudentRepository studentRepository;
+    private final Logger logger = LoggerFactory.getLogger(AvatarService.class);
 
     public AvatarService(AvatarRepository avatarRepository, StudentRepository studentRepository) {
         this.avatarRepository = avatarRepository;
@@ -31,16 +34,18 @@ public class AvatarService {
     }
 
     public Avatar findAvatar(long studentId) {
+        logger.info("Was invoked method for find avatar by " + studentId);
         return avatarRepository.findByStudentId(studentId).orElseThrow();
     }
 
     public Collection<Avatar> findAllAvatar(Integer pageNumber, Integer pageSize) {
+        logger.info("Was invoked method for find all avatars");
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, pageSize);
         return avatarRepository.findAll(pageRequest).getContent();
     }
 
     public void uploadAvatar(Long studentId, MultipartFile file) throws IOException {
-
+        logger.info("Was invoked method for upload avatar");
         Student student = studentRepository.getById(studentId);
 
         Path filePath = Path.of(avatarsDir, studentId + "." + getExtension(file.getOriginalFilename()));
@@ -52,7 +57,7 @@ public class AvatarService {
              BufferedInputStream bis = new BufferedInputStream(is, 1024);
              BufferedOutputStream bos = new BufferedOutputStream(os, 1024);
         ) {
-            bis.transferTo(bos);
+             bis.transferTo(bos);
         }
 
         Avatar avatar = avatarRepository.findByStudentId(studentId).orElseGet(Avatar::new);
