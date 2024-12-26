@@ -13,6 +13,8 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
@@ -88,6 +90,24 @@ public class StudentService {
     public Collection<FiveLastStudents> getFiveLastStudents() {
         logger.info("Was invoked method for get last five students");
         return studentRepository.getFiveLastStudents();
+    }
+    public List<String> getNamesOfStudentsByLetterA() {
+        return studentRepository.findAll()
+                .stream()
+                .parallel()
+                .filter(s -> s.getName().startsWith("A"))
+                .map(s -> s.getName().toUpperCase())
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public double getAverageAgeOfStudentsStream() {
+        return studentRepository.findAll()
+                .stream()
+                .parallel()
+                .mapToInt(s -> s.getAge())
+                .average()
+                .orElse(0);
     }
 }
 
