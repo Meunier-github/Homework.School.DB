@@ -15,13 +15,13 @@ import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 @Service
 public class StudentService {
-
 
     private final StudentRepository studentRepository;
     private final Logger logger = LoggerFactory.getLogger(StudentService.class);
@@ -108,6 +108,37 @@ public class StudentService {
                 .mapToInt(s -> s.getAge())
                 .average()
                 .orElse(0);
+    }
+    public Integer getSumNumber() {
+        int sum = 0;
+        long startTime;
+        long finishTime;
+        final int LIMIT = 1_000_000;
+        startTime = System.currentTimeMillis();
+        sum = Stream.iterate(1, a -> a + 1)
+                .limit(LIMIT)
+                .reduce(0, (a, b) -> a + b);
+        finishTime = System.currentTimeMillis();
+        logger.info("Время выполнения алгоритма без paralle равно " + (finishTime - startTime) + " мс");
+
+        sum=0;
+        startTime = System.currentTimeMillis();
+        sum = Stream.iterate(1, a -> a + 1)
+                .limit(LIMIT)
+                .parallel()
+                .reduce(0, (a, b) -> a + b);
+        finishTime = System.currentTimeMillis();
+        logger.info("Время выполнения алгоритма с paralle равно " + (finishTime - startTime) + " мс");
+
+        sum = 0;
+        startTime = System.currentTimeMillis();
+        for (int i = 0; i < LIMIT; i++) {
+            sum += i;
+        }
+        finishTime = System.currentTimeMillis();
+        logger.info("Время выполнения алгоритма с циклом for равно " + (finishTime - startTime) + " мс");
+
+        return sum;
     }
 }
 

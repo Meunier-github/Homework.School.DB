@@ -94,5 +94,9 @@ public class StudentController {
     public Double getAverageAgeOfStudentsStream() {
         return studentService.getAverageAgeOfStudentsStream();
     }
+    @GetMapping("getSumNumber")
 
+    public Integer getSumNumber() {
+        return studentService.getSumNumber();
+    }
 }
