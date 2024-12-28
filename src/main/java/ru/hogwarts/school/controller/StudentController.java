@@ -95,8 +95,15 @@ public class StudentController {
         return studentService.getAverageAgeOfStudentsStream();
     }
     @GetMapping("getSumNumber")
-
     public Integer getSumNumber() {
         return studentService.getSumNumber();
+    }
+    @GetMapping("print-parallel")
+    public void getPrintParallel() {
+        studentService.getPrintParallel();
+    }
+    @GetMapping("print-synchronized")
+    public void getPrintSynchronized() {
+        studentService.getPrintSynchronized();
     }
 }
